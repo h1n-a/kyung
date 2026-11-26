@@ -683,38 +683,42 @@
     <button type="button" class="btn-primary btn-full" id="helpClose">확인</button>
   </dialog>
 
+  <!-- 화면 전환·갤러리·미디어 제어는 jQuery로 작성했다 (강의 실습과 같은 vendor 폴더의 jQuery 사용) -->
+  <script src="vendor/jquery-3.7.1.min.js"></script>
   <script>
-    (function () {
+    $(function () {
       "use strict";
 
-      var doc = document;
-      var views = Array.prototype.slice.call(doc.querySelectorAll(".view-section"));
-      var navItems = Array.prototype.slice.call(doc.querySelectorAll(".nav-trigger, .mobile-tab"));
-      var validIds = views.map(function (v) { return v.id; });
-      var homeTitle = doc.title;
+      var $doc = $(document);
+      var $win = $(window);
+      var $views = $(".view-section");
+      var $navItems = $(".nav-trigger, .mobile-tab");
+      var validIds = $views.map(function () { return this.id; }).get();
+      var homeTitle = document.title;
       var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-      var canTransition = typeof doc.startViewTransition === "function";
+      var canTransition = typeof document.startViewTransition === "function";
       var currentId = null;
 
-      if (canTransition) doc.documentElement.classList.add("vt");
+      if (canTransition) $("html").addClass("vt");
 
       // 스크롤하면 상단 메뉴에 바탕색을 깐다
-      var siteHeader = doc.getElementById("siteHeader");
-      function syncHeader() { siteHeader.classList.toggle("is-stuck", window.scrollY > 12); }
-      window.addEventListener("scroll", syncHeader, { passive: true });
+      var $header = $("#siteHeader");
+      function syncHeader() { $header.toggleClass("is-stuck", $win.scrollTop() > 12); }
+      $win.on("scroll", syncHeader);
       syncHeader();
 
       // 홈 야경 점등: 사진이 도착하면 조명이 켜지고, 처음 한 번만 재생한다
-      var heroScene = doc.getElementById("heroScene");
-      var heroImg = heroScene.querySelector("img");
-      function lightUp() { heroScene.classList.add("is-ready"); }
+      var $heroScene = $("#heroScene");
+      var heroImg = $heroScene.find("img").get(0);
+      function lightUp() { $heroScene.addClass("is-ready"); }
       if (heroImg.complete) lightUp();
-      else { heroImg.addEventListener("load", lightUp); heroImg.addEventListener("error", lightUp); }
-      heroScene.addEventListener("animationend", function () { heroScene.classList.add("is-lit"); });
+      else $(heroImg).one("load error", lightUp);
+      $heroScene.on("animationend", function () { $heroScene.addClass("is-lit"); });
 
-      function pauseAllMedia() {
-        doc.querySelectorAll("audio, video").forEach(function (el) {
-          try { if (!el.paused) el.pause(); } catch (e) {}
+      // 화면을 옮기거나 다른 미디어를 틀면 재생 중이던 것은 멈춘다
+      function pauseAllMedia(except) {
+        $("audio, video").each(function () {
+          if (this !== except && !this.paused) this.pause();
         });
         stopEmbeds();
       }
@@ -723,91 +727,73 @@
       // 파일을 직접 연 경우(file://)에는 유튜브가 삽입 재생을 막으므로 새 창에서 연다.
       var canEmbed = /^https?:$/.test(location.protocol);
       if (!canEmbed) {
-        var ytNote = doc.getElementById("ytNote");
-        if (ytNote) ytNote.textContent = "파일을 직접 열면 유튜브가 이 화면 안에서 재생되지 않아, 재생 버튼을 누르면 새 창에서 엽니다.";
+        $("#ytNote").text("파일을 직접 열면 유튜브가 이 화면 안에서 재생되지 않아, 재생 버튼을 누르면 새 창에서 엽니다.");
       }
       function stopEmbeds() {
-        doc.querySelectorAll(".is-playing-embed").forEach(function (frame) {
-          var player = frame.querySelector("iframe");
-          if (player) player.remove();
-          frame.classList.remove("is-playing-embed");
-        });
+        $(".is-playing-embed").removeClass("is-playing-embed").find("iframe").remove();
       }
-      doc.addEventListener("click", function (event) {
-        var playBtn = event.target.closest("[data-yt-play]");
-        if (!playBtn) return;
-        var frame = playBtn.closest("[data-youtube-id]");
-        var id = frame.getAttribute("data-youtube-id");
+      $doc.on("click", "[data-yt-play]", function () {
+        var $frame = $(this).closest("[data-youtube-id]");
+        var id = $frame.attr("data-youtube-id");
         if (!canEmbed) {
           window.open("https://www.youtube.com/watch?v=" + id, "_blank", "noopener");
           return;
         }
-        doc.querySelectorAll("audio, video").forEach(function (el) { if (!el.paused) el.pause(); });
-        var player = doc.createElement("iframe");
-        player.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0";
-        player.title = "경복궁 4K 도보 탐방 영상";
-        player.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-        player.referrerPolicy = "strict-origin-when-cross-origin";
-        player.allowFullscreen = true;
-        frame.appendChild(player);
-        frame.classList.add("is-playing-embed");
+        pauseAllMedia();
+        $("<iframe>")
+          .attr({
+            src: "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0",
+            title: "경복궁 4K 도보 탐방 영상",
+            allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
+            referrerpolicy: "strict-origin-when-cross-origin",
+            allowfullscreen: ""
+          })
+          .appendTo($frame);
+        $frame.addClass("is-playing-embed");
       });
 
       // 한 번에 하나의 오디오/비디오만 재생
-      doc.addEventListener("play", function (event) {
-        doc.querySelectorAll("audio, video").forEach(function (el) {
-          if (el !== event.target && !el.paused) {
-            try { el.pause(); } catch (e) {}
-          }
-        });
-        stopEmbeds();
-      }, true);
+      $("audio, video").on("play", function () { pauseAllMedia(this); });
 
       // 음악 재생 중에는 표지에 조명이 켜진다
-      doc.querySelectorAll(".music-panel audio").forEach(function (audio) {
-        var section = audio.closest(".view-section");
-        ["play", "playing", "pause", "ended"].forEach(function (type) {
-          audio.addEventListener(type, function () {
-            section.classList.toggle("is-playing", !audio.paused && !audio.ended);
-          });
-        });
+      $(".music-panel audio").on("play playing pause ended", function () {
+        $(this).closest(".view-section").toggleClass("is-playing", !this.paused && !this.ended);
       });
 
       function applyView(targetId, opts) {
-        views.forEach(function (sec) {
-          sec.classList.toggle("is-active", sec.id === targetId);
-        });
+        $views.each(function () { $(this).toggleClass("is-active", this.id === targetId); });
 
         var navKey = (targetId === "music2") ? "music1" : targetId;
-        navItems.forEach(function (link) {
-          if (link.getAttribute("data-nav") === navKey) link.setAttribute("aria-current", "page");
-          else link.removeAttribute("aria-current");
+        $navItems.each(function () {
+          var $link = $(this);
+          if ($link.attr("data-nav") === navKey) $link.attr("aria-current", "page");
+          else $link.removeAttr("aria-current");
         });
 
-        var section = doc.getElementById(targetId);
-        var label = section.getAttribute("data-title");
-        doc.title = label ? label + " · 경복궁" : homeTitle;
+        var $section = $("#" + targetId);
+        var label = $section.attr("data-title");
+        document.title = label ? label + " · 경복궁" : homeTitle;
 
         if (opts.accordion) {
-          section.querySelectorAll(".accordion-item").forEach(function (item) {
-            item.open = (item.id === opts.accordion);
+          $section.find(".accordion-item").each(function () {
+            $(this).prop("open", this.id === opts.accordion);
           });
         }
 
-        var anchor = opts.scroll ? doc.getElementById(opts.scroll) : null;
+        var anchor = opts.scroll ? document.getElementById(opts.scroll) : null;
         if (anchor) anchor.scrollIntoView({ block: "start" });
         else if (opts.changed) window.scrollTo(0, 0);
 
         // 화면이 바뀌면 제목으로 초점을 옮겨 키보드·화면낭독기 사용자가 위치를 알 수 있게 한다
         if (opts.focusHeading) {
-          var heading = section.querySelector("h1");
+          var heading = $section.find("h1").get(0);
           if (heading) heading.focus({ preventScroll: true });
         }
       }
 
       function showView(id, opts) {
         opts = opts || {};
-        var targetId = validIds.indexOf(id) !== -1 ? id : "home";
+        var targetId = $.inArray(id, validIds) !== -1 ? id : "home";
         opts.changed = targetId !== currentId;
         if (opts.changed) pauseAllMedia();
 
@@ -816,7 +802,7 @@
         opts.focusHeading = opts.changed && !first && !opts.keepFocus;
 
         if (opts.changed && !first && canTransition && !reduceMotion.matches) {
-          doc.startViewTransition(function () { applyView(targetId, opts); });
+          document.startViewTransition(function () { applyView(targetId, opts); });
         } else {
           applyView(targetId, opts);
         }
@@ -826,30 +812,26 @@
         }
       }
 
-      // 갤러리 크게 보기
-      var galleryCards = Array.prototype.slice.call(doc.querySelectorAll("#galleryGrid .gallery-card"));
-      var lightbox = doc.getElementById("lightboxModal");
-      var lightboxImg = doc.getElementById("lightboxImg");
-      var lightboxTitle = doc.getElementById("lightboxTitle");
-      var lightboxDesc = doc.getElementById("lightboxDesc");
-      var lightboxCount = doc.getElementById("lightboxCount");
-      var blankPixel = lightboxImg.getAttribute("src");
+      // 갤러리 크게 보기: 고른 사진의 정보를 data-* 속성에서 읽어 attr()·text()로 채운다
+      var $cards = $("#galleryGrid .gallery-card");
+      var lightbox = $("#lightboxModal").get(0);
+      var $lightboxImg = $("#lightboxImg");
+      var blankPixel = $lightboxImg.attr("src");
       var currentIdx = 0;
 
       function pad(n) { return (n < 10 ? "0" : "") + n; }
 
       function showPhoto(idx) {
-        var total = galleryCards.length;
+        var total = $cards.length;
         currentIdx = (idx + total) % total;
-        var card = galleryCards[currentIdx];
-        lightboxImg.src = card.getAttribute("data-full");
-        lightboxImg.alt = card.querySelector("img").alt;
-        lightboxTitle.textContent = card.getAttribute("data-name");
-        lightboxDesc.textContent = card.getAttribute("data-desc") || "";
-        lightboxCount.innerHTML = "<b>" + pad(currentIdx + 1) + "</b> / " + pad(total);
+        var $card = $cards.eq(currentIdx);
+        $lightboxImg.attr({ src: $card.attr("data-full"), alt: $card.find("img").attr("alt") });
+        $("#lightboxTitle").text($card.attr("data-name"));
+        $("#lightboxDesc").text($card.attr("data-desc") || "");
+        $("#lightboxCount").html("<b>" + pad(currentIdx + 1) + "</b> / " + pad(total));
         // 좌우 사진을 미리 받아 넘길 때 끊기지 않게 한다
-        [currentIdx - 1, currentIdx + 1].forEach(function (n) {
-          new Image().src = galleryCards[(n + total) % total].getAttribute("data-full");
+        $.each([currentIdx - 1, currentIdx + 1], function (_, n) {
+          new Image().src = $cards.eq((n + total) % total).attr("data-full");
         });
       }
 
@@ -858,94 +840,90 @@
         if (!lightbox.open) lightbox.showModal();
       }
 
-      lightbox.addEventListener("close", function () { lightboxImg.src = blankPixel; });
+      $(lightbox).on("close", function () { $lightboxImg.attr("src", blankPixel); });
+
       // 바깥(어두운 배경)을 누르면 닫힌다
       function closeOnBackdrop(dialog) {
-        dialog.addEventListener("click", function (event) {
+        $(dialog).on("click", function (event) {
           if (event.target !== dialog) return;
-          var box = (dialog.firstElementChild && dialog === lightbox ? dialog.firstElementChild : dialog).getBoundingClientRect();
+          var boxEl = (dialog === lightbox && dialog.firstElementChild) ? dialog.firstElementChild : dialog;
+          var box = boxEl.getBoundingClientRect();
           var inside = event.clientX >= box.left && event.clientX <= box.right && event.clientY >= box.top && event.clientY <= box.bottom;
           if (!inside) dialog.close();
         });
       }
       closeOnBackdrop(lightbox);
-      doc.getElementById("lightboxClose").addEventListener("click", function () { lightbox.close(); });
-      doc.getElementById("lightboxPrev").addEventListener("click", function () { showPhoto(currentIdx - 1); });
-      doc.getElementById("lightboxNext").addEventListener("click", function () { showPhoto(currentIdx + 1); });
+      $("#lightboxClose").on("click", function () { lightbox.close(); });
+      $("#lightboxPrev").on("click", function () { showPhoto(currentIdx - 1); });
+      $("#lightboxNext").on("click", function () { showPhoto(currentIdx + 1); });
 
       // 손가락으로 좌우로 밀어 넘기기
-      var stage = doc.getElementById("lightboxStage");
       var swipeStart = null;
-      stage.addEventListener("pointerdown", function (event) {
-        if (event.pointerType === "mouse" || event.target.closest("button")) return;
-        swipeStart = { x: event.clientX, y: event.clientY };
-      });
-      stage.addEventListener("pointerup", function (event) {
-        if (!swipeStart) return;
-        var dx = event.clientX - swipeStart.x;
-        var dy = event.clientY - swipeStart.y;
-        swipeStart = null;
-        if (Math.abs(dx) > 44 && Math.abs(dx) > Math.abs(dy) * 1.4) showPhoto(currentIdx + (dx < 0 ? 1 : -1));
-      });
-      stage.addEventListener("pointercancel", function () { swipeStart = null; });
+      $("#lightboxStage")
+        .on("pointerdown", function (event) {
+          if (event.originalEvent.pointerType === "mouse" || $(event.target).closest("button").length) return;
+          swipeStart = { x: event.clientX, y: event.clientY };
+        })
+        .on("pointerup", function (event) {
+          if (!swipeStart) return;
+          var dx = event.clientX - swipeStart.x;
+          var dy = event.clientY - swipeStart.y;
+          swipeStart = null;
+          if (Math.abs(dx) > 44 && Math.abs(dx) > Math.abs(dy) * 1.4) showPhoto(currentIdx + (dx < 0 ? 1 : -1));
+        })
+        .on("pointercancel", function () { swipeStart = null; });
 
-      doc.getElementById("galleryGrid").addEventListener("click", function (event) {
-        var card = event.target.closest(".gallery-card");
-        if (card) openLightbox(parseInt(card.getAttribute("data-index"), 10) || 0);
+      // 이벤트 위임: 갤러리 사진, 소개 화면의 건물 사진
+      $("#galleryGrid").on("click", ".gallery-card", function () {
+        openLightbox(parseInt($(this).attr("data-index"), 10) || 0);
+      });
+      $doc.on("click", "[data-open-photo]", function () {
+        openLightbox(parseInt($(this).attr("data-open-photo"), 10) || 0);
       });
 
       // 재생 안내
-      var helpModal = doc.getElementById("helpModal");
-      doc.getElementById("helpClose").addEventListener("click", function () { helpModal.close(); });
+      var helpModal = $("#helpModal").get(0);
+      $("#helpClose").on("click", function () { helpModal.close(); });
       closeOnBackdrop(helpModal);
+      $doc.on("click", "[data-open-help]", function () {
+        pauseAllMedia();
+        helpModal.showModal();
+      });
 
-      doc.addEventListener("click", function (event) {
-        var helpBtn = event.target.closest("[data-open-help]");
-        if (helpBtn) {
-          pauseAllMedia();
-          helpModal.showModal();
-          return;
-        }
-
-        var photoBtn = event.target.closest("[data-open-photo]");
-        if (photoBtn) {
-          openLightbox(parseInt(photoBtn.getAttribute("data-open-photo"), 10) || 0);
-          return;
-        }
-
-        var link = event.target.closest("a[data-nav]");
-        if (!link) return;
+      // 이벤트 위임: 화면을 옮기는 모든 링크 (상단 메뉴, 하단 탭, 목록, 이전·다음)
+      $doc.on("click", "a[data-nav]", function (event) {
         event.preventDefault();
-        var photoIdx = link.getAttribute("data-photo");
-        var hasPhoto = photoIdx !== null && photoIdx !== "";
+        var $link = $(this);
+        var photoIdx = $link.attr("data-photo");
+        var hasPhoto = photoIdx !== undefined && photoIdx !== "";
 
-        showView(link.getAttribute("data-nav"), {
+        showView($link.attr("data-nav"), {
           push: true,
-          accordion: link.getAttribute("data-accordion"),
-          scroll: link.getAttribute("data-scroll"),
+          accordion: $link.attr("data-accordion"),
+          scroll: $link.attr("data-scroll"),
           keepFocus: hasPhoto
         });
 
         // 하위 메뉴에서 고른 뒤에는 메뉴가 닫히도록 초점을 뗀다
-        if (link.closest(".dropdown-panel") && doc.activeElement === link) link.blur();
+        if ($link.closest(".dropdown-panel").length && document.activeElement === this) $link.trigger("blur");
         if (hasPhoto) openLightbox(parseInt(photoIdx, 10) || 0);
       });
 
-      window.addEventListener("hashchange", function () {
+      $win.on("hashchange", function () {
         showView((location.hash || "#home").replace("#", ""));
       });
 
-      doc.addEventListener("keydown", function (event) {
+      $doc.on("keydown", function (event) {
         if (lightbox.open) {
           if (event.key === "ArrowLeft") showPhoto(currentIdx - 1);
           else if (event.key === "ArrowRight") showPhoto(currentIdx + 1);
-        } else if (event.key === "Escape" && doc.activeElement && doc.activeElement.closest(".nav-group")) {
-          doc.activeElement.blur(); // Esc로 하위 메뉴 닫기
+        } else if (event.key === "Escape" && $(document.activeElement).closest(".nav-group").length) {
+          document.activeElement.blur(); // Esc로 하위 메뉴 닫기
         }
       });
 
       showView((location.hash || "#home").replace("#", ""));
-    })();
+    });
   </script>
   <script src="hero-3d.js" defer></script>
   <script src="hero-walk.js" defer></script>

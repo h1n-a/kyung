@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>경복궁 · 서울의 밤을 비추는 조선의 법궁</title>
+  <meta name="description" content="밤하늘 아래 조명이 켜진 경복궁을 만나 보세요. 창건과 중건의 역사, 주요 전각, 드론 영상과 음악, 전각 사진 12선을 한자리에 담았습니다.">
+  <meta name="theme-color" content="#0b1222">
+  <meta property="og:title" content="경복궁 · 서울의 밤을 비추는 조선의 법궁">
+  <meta property="og:description" content="밤하늘 아래 조명이 켜진 경복궁의 역사와 전각, 영상과 음악, 사진 12선.">
+  <meta property="og:image" content="assets/web/hero-night-1600.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f1930'/%3E%3Cg fill='none' stroke='%23f0c674' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 14c4.5-1.2 8.2-3.8 11-7 2.8 3.2 6.5 5.8 11 7'/%3E%3Cpath d='M8 14v10M24 14v10M13 14v10M19 14v10M6 24h20M9 18h14'/%3E%3C/g%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Song+Myung&family=Noto+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@600&display=swap">
+  <link rel="preload" as="image" href="assets/web/hero-night-1600.jpg" imagesrcset="assets/web/hero-night-900.jpg 900w, assets/web/hero-night-1600.jpg 1600w, assets/web/hero-night-2400.jpg 2400w" imagesizes="(min-width: 760px) 100vw, 215vw" fetchpriority="high">
+  <link rel="stylesheet" href="style5.css">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+
+  <!-- 상단 내비게이션 (마우스를 올리거나 키보드로 들어가면 하위 메뉴가 열림) -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner wrap">
+      <a href="#home" class="brand-btn" data-nav="home" aria-label="경복궁 홈으로 이동">
+        <span class="brand-title">경복궁</span>
+        <span class="brand-hanja" lang="ko-Hani" aria-hidden="true">景福宮</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="주요 메뉴">
+        <div class="nav-group">
+          <a href="#home" class="nav-trigger" data-nav="home" aria-current="page">홈</a>
+        </div>
+
+        <div class="nav-group">
+          <a href="#intro" class="nav-trigger" data-nav="intro">
+            <span>궁궐 소개</span>
+          </a>
+          <div class="dropdown-panel">
+            <ul class="dropdown-list">
+              <li>
+                <a href="#intro" class="dropdown-link" data-nav="intro" data-accordion="acc-history">
+                  <strong>창건과 중건의 역사</strong>
+                  <span>1395년 태조 창건부터 복원 사업까지</span>
+                </a>
+              </li>
+              <li>
+                <a href="#intro" class="dropdown-link" data-nav="intro" data-accordion="acc-buildings">
+                  <strong>주요 건축물</strong>
+                  <span>광화문, 근정전, 경회루, 향원정</span>
+                </a>
+              </li>
+              <li>
+                <a href="#intro" class="dropdown-link" data-nav="intro" data-accordion="acc-etiquette">
+                  <strong>관람 예절</strong>
+                  <span>문화유산 보호와 쾌적한 관람 안내</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="nav-group">
+          <a href="#movie" class="nav-trigger" data-nav="movie">
+            <span>경복궁 영상</span>
+          </a>
+          <div class="dropdown-panel">
+            <ul class="dropdown-list">
+              <li>
+                <a href="#movie" class="dropdown-link" data-nav="movie" data-scroll="video-drone">
+                  <strong>4K 드론 항공 영상</strong>
+                  <span>하늘에서 담은 경복궁의 전경</span>
+                </a>
+              </li>
+              <li>
+                <a href="#movie" class="dropdown-link" data-nav="movie" data-scroll="video-mv">
+                  <strong>안예은 - 메롱해치 MV</strong>
+                  <span>경복궁의 풍경과 함께 감상하는 뮤직비디오</span>
+                </a>
+              </li>
+              <li>
+                <a href="#movie" class="dropdown-link" data-nav="movie" data-scroll="video-youtube">
+                  <strong>유튜브 4K 도보 탐방</strong>
+                  <span>전각 사이를 걷는 온라인 산책</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="nav-group">
+          <a href="#music1" class="nav-trigger" data-nav="music1">
+            <span>테마 음악</span>
+          </a>
+          <div class="dropdown-panel">
+            <ul class="dropdown-list">
+              <li>
+                <a href="#music1" class="dropdown-link" data-nav="music1">
+                  <strong>안예은 - 메롱해치</strong>
+                  <span>경복궁 대표 테마곡 (04:01)</span>
+                </a>
+              </li>
+              <li>
+                <a href="#music2" class="dropdown-link" data-nav="music2">
+                  <strong>궁궐의 선율</strong>
+                  <span>경회루와 후원의 고요한 선율 (00:15)</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="nav-group nav-group--right">
+          <a href="#gallery" class="nav-trigger" data-nav="gallery">
+            <span>갤러리</span>
+          </a>
+          <div class="dropdown-panel">
+            <ul class="dropdown-list">
+              <li>
+                <a href="#gallery" class="dropdown-link" data-nav="gallery" data-photo="0">
+                  <strong>광화문</strong>
+                  <span>조선 법궁의 상징 정문</span>
+                </a>
+              </li>
+              <li>
+                <a href="#gallery" class="dropdown-link" data-nav="gallery" data-photo="1">
+                  <strong>근정전</strong>
+                  <span>왕의 즉위식이 열린 국보 정전</span>
+                </a>
+              </li>
+              <li>
+                <a href="#gallery" class="dropdown-link" data-nav="gallery" data-photo="2">
+                  <strong>경회루</strong>
+                  <span>연못 위에 비친 웅장한 누각</span>
+                </a>
+              </li>
+              <li>
+                <a href="#gallery" class="dropdown-link" data-nav="gallery" data-photo="3">
+                  <strong>향원정</strong>
+                  <span>후원 연못 속 단아한 육각 정자</span>
+                </a>
+              </li>
+              <li>
+                <a href="#gallery" class="dropdown-link" data-nav="gallery">
+                  <strong>전체 12선 보기</strong>
+                  <span>광화문부터 집옥재까지 한눈에</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="app-main" id="main">
+
+    <!-- ========== 홈 ========== -->
+    <section id="home" class="view-section is-active" aria-label="경복궁 홈" data-title="">
+      <div class="hero">
+        <div class="hero-scene" id="heroScene">
+          <img src="assets/web/hero-night-1600.jpg"
+               srcset="assets/web/hero-night-900.jpg 900w, assets/web/hero-night-1600.jpg 1600w, assets/web/hero-night-2400.jpg 2400w"
+               sizes="(min-width: 760px) 100vw, 215vw"
+               width="2400" height="1431" fetchpriority="high" decoding="async"
+               alt="푸른 밤하늘 아래 은은한 조명이 켜진 서울 경복궁 광화문 야경">
+        </div>
+
+        <div class="hero-copy">
+          <h1 class="hero-title" tabindex="-1">서울의 밤을 비추는 조선의 법궁</h1>
+        </div>
+
+        <!-- 장식용 세로 글귀: 내용은 궁궐 소개 화면에 그대로 있다 -->
+        <p class="hero-couplet hero-couplet--name" lang="ko-Hani" aria-hidden="true">景福宮</p>
+        <p class="hero-couplet hero-couplet--meaning" aria-hidden="true">큰 복을 누리며 번영하라</p>
+
+        <div class="hero-foot wrap">
+          <p class="hero-subtitle">푸른 밤하늘과 단청 처마 아래 흐르는 600년의 시간, 경복궁의 야경과 전각을 만나보세요.</p>
+          <div class="hero-actions">
+            <a href="#gallery" class="btn-primary" data-nav="gallery">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+              전각 갤러리 보기
+            </a>
+            <a href="#movie" class="btn-ghost" data-nav="movie">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+              영상과 뮤직비디오
+            </a>
+          </div>
+          <p class="hero-credit">사진 출처: 국가유산청 (공공누리 제1유형)</p>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <section class="visit" aria-labelledby="visitTitle">
+          <h2 id="visitTitle">관람 안내</h2>
+          <dl class="visit-grid">
+            <div><dt>위치</dt><dd>서울특별시 종로구 사직로 161</dd></div>
+            <div><dt>휴궁일</dt><dd>매주 화요일 정기 휴궁</dd></div>
+            <div><dt>야간관람</dt><dd>계절별 공식 일정 확인</dd></div>
+          </dl>
+          <a class="text-link" href="https://royal.khs.go.kr/gbg" target="_blank" rel="noopener">
+            공식 누리집에서 일정 보기
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+        </section>
+
+        <p class="home-intro">태조 4년(1395)에 창건된 조선 왕조의 으뜸 궁궐, 경복궁의 역사와 주요 전각, 4K 드론 영상과 안예은의 「메롱해치」 뮤직비디오, 사계절 전각 사진 12선을 한 자리에서 감상하실 수 있습니다.</p>
+
+        <ul class="index-list">
+          <li>
+            <a href="#intro" class="index-row" data-nav="intro">
+              <img class="index-thumb" src="assets/web/02-geunjeongjeon-thumb.jpg" width="640" height="478" alt="" loading="lazy" decoding="async">
+              <span class="index-name">궁궐 소개</span>
+              <span class="index-desc">창건과 중건의 역사, 핵심 전각, 관람 예절 안내</span>
+              <svg class="index-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="#movie" class="index-row" data-nav="movie">
+              <img class="index-thumb" src="assets/web/poster-drone-thumb.jpg" width="640" height="338" alt="" loading="lazy" decoding="async">
+              <span class="index-name">경복궁 영상</span>
+              <span class="index-desc">4K 드론 항공 영상과 안예은 - 메롱해치 뮤직비디오</span>
+              <svg class="index-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="#music1" class="index-row" data-nav="music1">
+              <img class="index-thumb" src="assets/web/07-yeongjegyo-thumb.jpg" width="640" height="478" alt="" loading="lazy" decoding="async">
+              <span class="index-name">안예은 - 메롱해치</span>
+              <span class="index-desc">경복궁을 거닐며 감상하는 대표 테마곡 (04:01)</span>
+              <svg class="index-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="#music2" class="index-row" data-nav="music2">
+              <img class="index-thumb" src="assets/web/03-gyeonghoeru-thumb.jpg" width="640" height="478" alt="" loading="lazy" decoding="async">
+              <span class="index-name">궁궐의 선율</span>
+              <span class="index-desc">경회루와 후원의 고요한 정취를 담은 선율</span>
+              <svg class="index-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="#gallery" class="index-row" data-nav="gallery">
+              <img class="index-thumb" src="assets/web/04-hyangwonjeong-thumb.jpg" width="640" height="478" alt="" loading="lazy" decoding="async">
+              <span class="index-name">경복궁 갤러리</span>
+              <span class="index-desc">광화문부터 집옥재까지 주요 전각 사진 12선</span>
+              <svg class="index-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ========== 궁궐 소개 ========== -->
+    <section id="intro" class="view-section page" aria-label="궁궐 소개" data-title="궁궐 소개">
+      <div class="wrap">
+        <div class="page-head">
+          <h1 tabindex="-1">경복궁<span class="hanja" lang="ko-Hani">景福宮</span></h1>
+          <p class="page-lead">조선 왕조 제일의 법궁으로, '큰 복을 누리며 번영하라'는 뜻을 담고 있습니다. 아래 항목을 열어 역사와 주요 전각, 관람 예절을 확인해 보세요.</p>
+        </div>
+
+        <div class="accordion-list">
+          <details class="accordion-item" id="acc-history" open>
+            <summary>
+              <h2>역사</h2>
+              <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="accordion-body">
+              <ol class="timeline">
+                <li><strong>1395년</strong><p>태조 이성계가 한양으로 도읍을 옮긴 뒤 가장 먼저 세운 조선의 정궁입니다.</p></li>
+                <li><strong>임진왜란</strong><p>전쟁으로 대부분의 전각이 소실되어 약 270년간 빈터로 남아 있었습니다.</p></li>
+                <li><strong>1867년</strong><p>고종 때 흥선대원군의 주도로 중건되며 조선 왕실의 권위를 되찾았습니다.</p></li>
+                <li><strong>복원 사업</strong><p>일제강점기에 훼손된 전각과 권역을 되살리는 단계적 복원이 이어지고 있습니다.</p></li>
+              </ol>
+            </div>
+          </details>
+
+          <details class="accordion-item" id="acc-buildings">
+            <summary>
+              <h2>주요 건축물</h2>
+              <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="accordion-body">
+              <ul class="building-grid">
+                <li class="building">
+                  <button type="button" class="building-thumb" data-open-photo="0" aria-label="광화문 사진 크게 보기">
+                    <img src="assets/web/01-gwanghwamun-thumb.jpg" width="640" height="478" alt="" loading="lazy" decoding="async">
+                  </button>
+                  <div><h3>광화문</h3><p>경복궁의 정문으로, 서울 도심과 궁궐을 잇는 상징적인 문입니다.</p></div>
+                </li>
+                <li class="building">
+                  <button type="button" class="building-thumb" data-open-photo="1" aria-label="근정전 사진 크게 보기">
+                    <img src="assets/web/02-geunjeongjeon-thumb.jpg" width="640" height="478" alt="" loading="lazy" decoding="async">
+                  </button>
+                  <div><h3>근정전</h3><p>왕의 즉위식과 주요 국가 의식이 거행되던 정전으로, 국보로 지정되어 있습니다.</p></div>
+                </li>
+                <li class="building">
+                  <button type="button" class="building-thumb" data-open-photo="2" aria-label="경회루 사진 크게 보기">
+                    <img src="assets/web/03-gyeonghoeru-thumb.jpg" width="640" height="478" alt="" loading="lazy" decoding="async">
+                  </button>
+                  <div><h3>경회루</h3><p>넓은 연못 위에 세워진 누각으로, 나라의 큰 연회와 사신 접대가 열리던 곳입니다.</p></div>
+                </li>
+                <li class="building">
+                  <button type="button" class="building-thumb" data-open-photo="3" aria-label="향원정 사진 크게 보기">
+                    <img src="assets/web/04-hyangwonjeong-thumb.jpg" width="640" height="478" alt="" loading="lazy" decoding="async">
+                  </button>
+                  <div><h3>향원정</h3><p>연못 한가운데 섬에 세워진 육각형 정자로, 후원의 단아한 아름다움을 보여 줍니다.</p></div>
+                </li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="accordion-item" id="acc-etiquette">
+            <summary>
+              <h2>관람 예절</h2>
+              <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="accordion-body">
+              <ul class="manner-list">
+                <li>전각의 기둥, 담장, 석조물은 소중한 문화유산이므로 손으로 만지거나 기대지 않습니다.</li>
+                <li>지정된 관람 동선을 따르고, 출입 제한 구역에는 들어가지 않습니다.</li>
+                <li>모든 관람객이 고즈넉한 궁궐의 정취를 느낄 수 있도록 정숙을 유지해 주세요.</li>
+                <li>휴궁일과 계절별 입장 마감 시간은 방문 전 공식 안내에서 미리 확인하세요.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+
+        <nav class="pager" aria-label="이전 화면과 다음 화면">
+          <a href="#home" class="pager-link pager-prev" data-nav="home">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+            <span><small>이전</small><strong>홈</strong></span>
+          </a>
+          <a href="#movie" class="pager-link pager-next" data-nav="movie">
+            <span><small>다음</small><strong>경복궁 영상</strong></span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ========== 영상 ========== -->
+    <section id="movie" class="view-section page" aria-label="경복궁 영상" data-title="경복궁 영상">
+      <div class="wrap">
+        <div class="page-head">
+          <h1 tabindex="-1">경복궁 영상</h1>
+          <p class="page-lead">하늘에서 바라본 경복궁 4K 드론 항공 영상과 안예은의 「메롱해치」 뮤직비디오를 감상하세요.</p>
+        </div>
+
+        <ul class="jump-list" aria-label="영상 바로가기">
+          <li><a href="#movie" class="jump-link" data-nav="movie" data-scroll="video-drone">드론 항공 영상 <span>2:12</span></a></li>
+          <li><a href="#movie" class="jump-link" data-nav="movie" data-scroll="video-mv">메롱해치 MV <span>7:23</span></a></li>
+          <li><a href="#movie" class="jump-link" data-nav="movie" data-scroll="video-youtube">도보 탐방 <span>유튜브</span></a></li>
+        </ul>
+
+        <div class="media-stack">
+          <article class="media-block" id="video-drone">
+            <div class="media-head">
+              <h2>4K 드론 항공 영상</h2>
+              <span class="media-time">2분 12초</span>
+            </div>
+            <p class="media-block-sub">서울 도심과 북악산 품에 안긴 경복궁의 웅장한 전경</p>
+            <div class="video-frame">
+              <video controls preload="none" playsinline width="1280" height="676" poster="assets/web/poster-drone.jpg" aria-label="4K 드론 항공 영상">
+                <source src="assets/[4K Drone] GyeongBokGung Palace.mp4" type="video/mp4">
+                이 브라우저는 video 태그를 지원하지 않습니다.
+              </video>
+            </div>
+          </article>
+
+          <article class="media-block" id="video-mv">
+            <div class="media-head">
+              <h2>안예은 - 메롱해치 (경복궁 MV)</h2>
+              <span class="media-time">7분 23초</span>
+            </div>
+            <p class="media-block-sub">경복궁의 전각과 해치의 이야기를 담은 뮤직비디오</p>
+            <div class="video-frame">
+              <video controls preload="none" playsinline width="1280" height="720" poster="assets/web/poster-mv.jpg" aria-label="안예은 메롱해치 뮤직비디오">
+                <source src="imges/kysong-web.mp4" type="video/mp4">
+                이 브라우저는 video 태그를 지원하지 않습니다.
+              </video>
+            </div>
+          </article>
+
+          <article class="media-block" id="video-youtube">
+            <div class="media-head">
+              <h2>유튜브 4K 도보 탐방</h2>
+              <span class="media-time">유튜브</span>
+            </div>
+            <p class="media-block-sub">광화문에서 후원까지 전각 사이를 천천히 거니는 4K 영상</p>
+            <div class="video-frame embed-16x9" data-youtube-id="Itb11ME3cSY">
+              <!-- 누르면 이 자리에 유튜브 영상을 불러온다. 파일을 직접 열었을 때(file://)는 새 창에서 연다 -->
+              <button type="button" class="yt-poster" data-yt-play aria-label="유튜브 4K 도보 탐방 영상 재생">
+                <img src="https://i.ytimg.com/vi/Itb11ME3cSY/maxresdefault.jpg" width="1280" height="720" alt="" loading="lazy" decoding="async">
+                <span class="yt-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg></span>
+              </button>
+            </div>
+            <div class="media-meta-row">
+              <span id="ytNote">재생 버튼을 누르면 이 화면에서 유튜브 영상이 시작됩니다.</span>
+              <a href="https://www.youtube.com/watch?v=Itb11ME3cSY" target="_blank" rel="noopener" class="inline-action">유튜브에서 직접 보기</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="media-meta-row" style="margin-top: 1.25rem;">
+          <button type="button" class="inline-action" data-open-help>재생 안내 보기</button>
+        </div>
+
+        <nav class="pager" aria-label="이전 화면과 다음 화면">
+          <a href="#intro" class="pager-link pager-prev" data-nav="intro">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+            <span><small>이전</small><strong>궁궐 소개</strong></span>
+          </a>
+          <a href="#music1" class="pager-link pager-next" data-nav="music1">
+            <span><small>다음</small><strong>테마 음악</strong></span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ========== 음악 1 ========== -->
+    <section id="music1" class="view-section page" aria-label="안예은 - 메롱해치" data-title="안예은 - 메롱해치">
+      <div class="wrap">
+        <div class="page-head">
+          <h1 tabindex="-1">안예은 - 메롱해치</h1>
+          <p class="page-lead">경복궁을 지키는 해치의 시선으로 600년의 시간을 노래하는 테마곡입니다.</p>
+        </div>
+
+        <div class="music-layout">
+          <div class="music-cover">
+            <img src="assets/web/07-yeongjegyo.jpg" width="1200" height="896" alt="경복궁 영제교 난간과 금천을 지키는 돌짐승 석상" decoding="async">
+            <span class="eq" aria-hidden="true"><span class="eq-bars"><i></i><i></i><i></i><i></i></span>재생 중</span>
+          </div>
+          <div class="music-panel">
+            <p class="music-duration">재생 시간 04:01</p>
+            <audio controls preload="metadata" aria-label="안예은 - 메롱해치">
+              <source src="imges/HAECHI.mp3" type="audio/mpeg">
+              이 브라우저는 audio 태그를 지원하지 않습니다.
+            </audio>
+            <p class="music-desc">조선 왕실의 위엄과 궁궐의 고즈넉한 울림을 담은 곡입니다. 이어폰과 함께 감상하시면 더욱 생생하게 즐기실 수 있습니다.</p>
+            <ol class="track-list" aria-label="테마 음악 목록">
+              <li><a href="#music1" class="track" data-nav="music1" aria-current="true"><span class="track-no">1</span><span>안예은 - 메롱해치</span><span class="track-time">04:01</span></a></li>
+              <li><a href="#music2" class="track" data-nav="music2"><span class="track-no">2</span><span>궁궐의 선율</span><span class="track-time">00:15</span></a></li>
+            </ol>
+            <button type="button" class="inline-action" data-open-help>재생 안내</button>
+          </div>
+        </div>
+
+        <nav class="pager" aria-label="이전 화면과 다음 화면">
+          <a href="#movie" class="pager-link pager-prev" data-nav="movie">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+            <span><small>이전</small><strong>경복궁 영상</strong></span>
+          </a>
+          <a href="#music2" class="pager-link pager-next" data-nav="music2">
+            <span><small>다음</small><strong>궁궐의 선율</strong></span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ========== 음악 2 ========== -->
+    <section id="music2" class="view-section page" aria-label="궁궐의 선율" data-title="궁궐의 선율">
+      <div class="wrap">
+        <div class="page-head">
+          <h1 tabindex="-1">궁궐의 선율</h1>
+          <p class="page-lead">경회루와 후원의 고요한 정취를 담은 잔잔한 연주곡입니다.</p>
+        </div>
+
+        <div class="music-layout">
+          <div class="music-cover">
+            <img src="assets/web/03-gyeonghoeru.jpg" width="1200" height="896" alt="연못에 비친 경복궁 경회루" decoding="async">
+            <span class="eq" aria-hidden="true"><span class="eq-bars"><i></i><i></i><i></i><i></i></span>재생 중</span>
+          </div>
+          <div class="music-panel">
+            <p class="music-duration">재생 시간 00:15</p>
+            <audio controls preload="metadata" aria-label="궁궐의 선율">
+              <source src="assets/palace-melody-2.mp3" type="audio/mpeg">
+              이 브라우저는 audio 태그를 지원하지 않습니다.
+            </audio>
+            <p class="music-desc">연못에 비친 누각과 밤바람 소리를 떠올리게 하는 차분한 궁궐 배경 음악입니다.</p>
+            <ol class="track-list" aria-label="테마 음악 목록">
+              <li><a href="#music1" class="track" data-nav="music1"><span class="track-no">1</span><span>안예은 - 메롱해치</span><span class="track-time">04:01</span></a></li>
+              <li><a href="#music2" class="track" data-nav="music2" aria-current="true"><span class="track-no">2</span><span>궁궐의 선율</span><span class="track-time">00:15</span></a></li>
+            </ol>
+            <button type="button" class="inline-action" data-open-help>재생 안내</button>
+          </div>
+        </div>
+
+        <nav class="pager" aria-label="이전 화면과 다음 화면">
+          <a href="#music1" class="pager-link pager-prev" data-nav="music1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+            <span><small>이전</small><strong>안예은 - 메롱해치</strong></span>
+          </a>
+          <a href="#gallery" class="pager-link pager-next" data-nav="gallery">
+            <span><small>다음</small><strong>갤러리</strong></span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ========== 갤러리 ========== -->
+    <section id="gallery" class="view-section page" aria-label="경복궁 갤러리" data-title="경복궁 갤러리">
+      <div class="wrap">
+        <div class="page-head">
+          <h1 tabindex="-1">경복궁 갤러리</h1>
+          <p class="page-lead">광화문부터 집옥재까지 경복궁의 주요 전각과 풍경 12선입니다. 사진을 선택하면 큰 화면으로 감상하고 좌우로 넘겨 볼 수 있습니다.</p>
+        </div>
+
+        <div class="gallery-grid" id="galleryGrid">
+          <button type="button" class="gallery-card gallery-card--feature" data-index="0" data-name="광화문" data-full="assets/web/01-gwanghwamun.jpg" data-desc="경복궁의 남쪽 정문. 세 개의 홍예문 위로 2층 문루가 올라 있습니다.">
+            <img src="assets/web/01-gwanghwamun-thumb.jpg" srcset="assets/web/01-gwanghwamun-thumb.jpg 640w, assets/web/01-gwanghwamun.jpg 1200w" sizes="(min-width: 760px) 44rem, 100vw" width="1200" height="896" alt="경복궁 광화문 전경" loading="lazy" decoding="async">
+            <span class="gallery-label"><span class="gallery-index">01</span>광화문</span>
+          </button>
+          <button type="button" class="gallery-card" data-index="1" data-name="근정전" data-full="assets/web/02-geunjeongjeon.jpg" data-desc="즉위식과 조회가 열리던 정전. 국보로 지정되어 있습니다.">
+            <img src="assets/web/02-geunjeongjeon-thumb.jpg" width="640" height="478" alt="경복궁 근정전 전경" loading="lazy" decoding="async">
+            <span class="gallery-label"><span class="gallery-index">02</span>근정전</span>
+          </button>
+          <button type="button" class="gallery-card" data-index="2" data-name="경회루" data-full="assets/web/03-gyeonghoeru.jpg" data-desc="연못 위에 세운 누각. 나라의 큰 연회와 사신 접대가 열렸습니다.">
+            <img src="assets/web/03-gyeonghoeru-thumb.jpg" width="640" height="478" alt="경복궁 경회루와 연못" loading="lazy" decoding="async">
+            <span class="gallery-label"><span class="gallery-index">03</span>경회루</span>
+          </button>
+          <button type="button" class="gallery-card" data-index="3" data-name="향원정" data-full="assets/web/04-hyangwonjeong.jpg" data-desc="후원 연못 가운데 섬에 선 육각 정자입니다.">
+            <img src="assets/web/04-hyangwonjeong-thumb.jpg" width="640" height="478" alt="경복궁 향원정과 연못" loading="lazy" decoding="async">
+            <span class="gallery-label"><span class="gallery-index">04</span>향원정</span>
+          </button>
+          <button type="button" class="gallery-card" data-index="4" data-name="흥례문" data-full="assets/web/05-heungnyemun.jpg" data-desc="광화문과 근정문 사이에 놓인 중문입니다.">
+            <img src="assets/web/05-heungnyemun-thumb.jpg" width="640" height="478" alt="경복궁 흥례문 전경" loading="lazy" decoding="async">
+            <span class="gallery-label"><span class="gallery-index">05</span>흥례문</span>
+          </button>
+          <button type="button" class="gallery-card" data-index="5" data-name="궁궐 담장" data-full="assets/web/06-wall.jpg" data-desc="무늬 벽돌을 쌓아 꾸민 꽃담이 전각 사이를 잇습니다.">
+            <img src="assets/web/06-wall-thumb.jpg" width="640" height="478" alt="경복궁 전통 꽃담과 산책로" loading="lazy" decoding="async">
+            <span class="gallery-label"><span class="gallery-index">06</span>궁궐 담장</span>
+          </button>
+          <button type="button" class="gallery-card" data-index="6" data-name="영제교" data-full="assets/web/07-yeongjegyo.jpg" data-desc="금천 위에 놓인 돌다리. 돌짐승이 물길을 지켜봅니다.">
+            <img src="assets/web/07-yeongjegyo-thumb.jpg" width="640" height="478" alt="경복궁 영제교와 금천" loading="lazy" decoding="async">
+            <span class="gallery-label"><span class="gallery-index">07</span>영제교</span>
+          </button>
+          <button type="button" class="gallery-card gallery-card--feature" data-index="7" data-name="자경전" data-full="assets/web/08-jagyeongjeon.jpg" data-desc="대비가 머물던 전각. 꽃담과 십장생 굴뚝으로 이름나 있습니다.">
+            <img src="assets/web/08-jagyeongjeon-thumb.jpg" srcset="assets/web/08-jagyeongjeon-thumb.jpg 640w, assets/web/08-jagyeongjeon.jpg 1200w" sizes="(min-width: 760px) 44rem, 100vw" width="1200" height="896" alt="경복궁 자경전 전경" loading="lazy" decoding="async">
+            <span class="gallery-label"><span class="gallery-index">08</span>자경전</span>
+          </button>
+          <button type="button" class="gallery-card" data-index="8" data-name="교태전" data-full="assets/web/09-gyotaejeon.jpg" data-desc="왕비가 생활하던 침전입니다.">
+            <img src="assets/web/09-gyotaejeon-thumb.jpg" width="640" height="478" alt="경복궁 교태전 전경" loading="lazy" decoding="async">
+            <span class="gallery-label"><span class="gallery-index">09</span>교태전</span>
+          </button>
+          <button type="button" class="gallery-card" data-index="9" data-name="수정전" data-full="assets/web/10-sujeongjeon.jpg" data-desc="세종 때 집현전이 있던 자리에 다시 지은 전각입니다.">
+            <img src="assets/web/10-sujeongjeon-thumb.jpg" width="640" height="478" alt="경복궁 수정전 전경" loading="lazy" decoding="async">
+            <span class="gallery-label"><span class="gallery-index">10</span>수정전</span>
+          </button>
+          <button type="button" class="gallery-card" data-index="10" data-name="건청궁" data-full="assets/web/11-geoncheonggung.jpg" data-desc="고종이 지은 궁 안의 궁. 1887년 이곳에서 처음 전등을 밝혔습니다.">
+            <img src="assets/web/11-geoncheonggung-thumb.jpg" width="640" height="478" alt="경복궁 건청궁 전경" loading="lazy" decoding="async">
+            <span class="gallery-label"><span class="gallery-index">11</span>건청궁</span>
+          </button>
+          <button type="button" class="gallery-card" data-index="11" data-name="집옥재" data-full="assets/web/12-jibokjae.jpg" data-desc="고종이 서재로 쓰던 전각. 옆에 팔우정이 붙어 있습니다.">
+            <img src="assets/web/12-jibokjae-thumb.jpg" width="640" height="478" alt="경복궁 집옥재와 팔우정" loading="lazy" decoding="async">
+            <span class="gallery-label"><span class="gallery-index">12</span>집옥재</span>
+          </button>
+        </div>
+
+        <nav class="pager" aria-label="이전 화면과 다음 화면">
+          <a href="#music2" class="pager-link pager-prev" data-nav="music2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+            <span><small>이전</small><strong>테마 음악</strong></span>
+          </a>
+          <a href="#home" class="pager-link pager-next" data-nav="home">
+            <span><small>처음으로</small><strong>홈</strong></span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </nav>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-inner">
+        <p class="footer-brand">경복궁<span lang="ko-Hani">景福宮</span></p>
+        <p>조선의 법궁 문화유산 안내 · 서울특별시 종로구 사직로 161</p>
+        <p>관람 시간과 야간관람 일정은 <a href="https://royal.khs.go.kr/gbg" target="_blank" rel="noopener">궁능유적본부 경복궁 누리집</a>에서 확인하세요.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 모바일 하단 메뉴 -->
+  <div class="mobile-nav-wrap">
+    <nav class="mobile-nav" aria-label="모바일 하단 메뉴">
+      <a href="#home" class="mobile-tab" data-nav="home" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v11a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg>
+        <span>홈</span>
+      </a>
+      <a href="#intro" class="mobile-tab" data-nav="intro">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+        <span>소개</span>
+      </a>
+      <a href="#movie" class="mobile-tab" data-nav="movie">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><polygon points="10 9 15 12 10 15 10 9"/></svg>
+        <span>영상</span>
+      </a>
+      <a href="#music1" class="mobile-tab" data-nav="music1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        <span>음악</span>
+      </a>
+      <a href="#gallery" class="mobile-tab" data-nav="gallery">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+        <span>갤러리</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- 갤러리 크게 보기 -->
+  <dialog class="lightbox" id="lightboxModal" aria-labelledby="lightboxTitle">
+    <div class="lightbox-shell">
+      <div class="lightbox-bar">
+        <p class="lightbox-count" id="lightboxCount" aria-live="polite"></p>
+        <button type="button" class="icon-btn" id="lightboxClose" aria-label="사진 닫기">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="lightbox-stage" id="lightboxStage">
+        <img id="lightboxImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="1200" height="896" alt="">
+        <button type="button" class="icon-btn lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="이전 사진">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>
+        </button>
+        <button type="button" class="icon-btn lightbox-nav lightbox-next" id="lightboxNext" aria-label="다음 사진">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+        </button>
+      </div>
+      <div class="lightbox-caption">
+        <h2 id="lightboxTitle">광화문</h2>
+        <p id="lightboxDesc"></p>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- 재생 안내 -->
+  <dialog class="help-dialog" id="helpModal" aria-labelledby="helpTitle">
+    <h2 id="helpTitle">재생 안내</h2>
+    <ul>
+      <li>모바일 브라우저에서는 소리가 포함된 미디어가 자동 재생되지 않으므로 재생 버튼을 직접 눌러 주세요.</li>
+      <li>다른 화면으로 이동하거나 이 안내 창을 열면 재생 중인 영상과 음악이 자동으로 일시정지됩니다.</li>
+      <li>영상과 음악은 한 번에 하나씩만 재생됩니다.</li>
+    </ul>
+    <button type="button" class="btn-primary btn-full" id="helpClose">확인</button>
+  </dialog>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var doc = document;
+      var views = Array.prototype.slice.call(doc.querySelectorAll(".view-section"));
+      var navItems = Array.prototype.slice.call(doc.querySelectorAll(".nav-trigger, .mobile-tab"));
+      var validIds = views.map(function (v) { return v.id; });
+      var homeTitle = doc.title;
+      var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      var canTransition = typeof doc.startViewTransition === "function";
+      var currentId = null;
+
+      if (canTransition) doc.documentElement.classList.add("vt");
+
+      // 스크롤하면 상단 메뉴에 바탕색을 깐다
+      var siteHeader = doc.getElementById("siteHeader");
+      function syncHeader() { siteHeader.classList.toggle("is-stuck", window.scrollY > 12); }
+      window.addEventListener("scroll", syncHeader, { passive: true });
+      syncHeader();
+
+      // 홈 야경 점등: 사진이 도착하면 조명이 켜지고, 처음 한 번만 재생한다
+      var heroScene = doc.getElementById("heroScene");
+      var heroImg = heroScene.querySelector("img");
+      function lightUp() { heroScene.classList.add("is-ready"); }
+      if (heroImg.complete) lightUp();
+      else { heroImg.addEventListener("load", lightUp); heroImg.addEventListener("error", lightUp); }
+      heroScene.addEventListener("animationend", function () { heroScene.classList.add("is-lit"); });
+
+      function pauseAllMedia() {
+        doc.querySelectorAll("audio, video").forEach(function (el) {
+          try { if (!el.paused) el.pause(); } catch (e) {}
+        });
+        stopEmbeds();
+      }
+
+      // 유튜브: 재생 버튼을 누르면 그 자리에 영상을 불러온다.
+      // 파일을 직접 연 경우(file://)에는 유튜브가 삽입 재생을 막으므로 새 창에서 연다.
+      var canEmbed = /^https?:$/.test(location.protocol);
+      if (!canEmbed) {
+        var ytNote = doc.getElementById("ytNote");
+        if (ytNote) ytNote.textContent = "파일을 직접 열면 유튜브가 이 화면 안에서 재생되지 않아, 재생 버튼을 누르면 새 창에서 엽니다.";
+      }
+      function stopEmbeds() {
+        doc.querySelectorAll(".is-playing-embed").forEach(function (frame) {
+          var player = frame.querySelector("iframe");
+          if (player) player.remove();
+          frame.classList.remove("is-playing-embed");
+        });
+      }
+      doc.addEventListener("click", function (event) {
+        var playBtn = event.target.closest("[data-yt-play]");
+        if (!playBtn) return;
+        var frame = playBtn.closest("[data-youtube-id]");
+        var id = frame.getAttribute("data-youtube-id");
+        if (!canEmbed) {
+          window.open("https://www.youtube.com/watch?v=" + id, "_blank", "noopener");
+          return;
+        }
+        doc.querySelectorAll("audio, video").forEach(function (el) { if (!el.paused) el.pause(); });
+        var player = doc.createElement("iframe");
+        player.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0";
+        player.title = "경복궁 4K 도보 탐방 영상";
+        player.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        player.referrerPolicy = "strict-origin-when-cross-origin";
+        player.allowFullscreen = true;
+        frame.appendChild(player);
+        frame.classList.add("is-playing-embed");
+      });
+
+      // 한 번에 하나의 오디오/비디오만 재생
+      doc.addEventListener("play", function (event) {
+        doc.querySelectorAll("audio, video").forEach(function (el) {
+          if (el !== event.target && !el.paused) {
+            try { el.pause(); } catch (e) {}
+          }
+        });
+        stopEmbeds();
+      }, true);
+
+      // 음악 재생 중에는 표지에 조명이 켜진다
+      doc.querySelectorAll(".music-panel audio").forEach(function (audio) {
+        var section = audio.closest(".view-section");
+        ["play", "playing", "pause", "ended"].forEach(function (type) {
+          audio.addEventListener(type, function () {
+            section.classList.toggle("is-playing", !audio.paused && !audio.ended);
+          });
+        });
+      });
+
+      function applyView(targetId, opts) {
+        views.forEach(function (sec) {
+          sec.classList.toggle("is-active", sec.id === targetId);
+        });
+
+        var navKey = (targetId === "music2") ? "music1" : targetId;
+        navItems.forEach(function (link) {
+          if (link.getAttribute("data-nav") === navKey) link.setAttribute("aria-current", "page");
+          else link.removeAttribute("aria-current");
+        });
+
+        var section = doc.getElementById(targetId);
+        var label = section.getAttribute("data-title");
+        doc.title = label ? label + " · 경복궁" : homeTitle;
+
+        if (opts.accordion) {
+          section.querySelectorAll(".accordion-item").forEach(function (item) {
+            item.open = (item.id === opts.accordion);
+          });
+        }
+
+        var anchor = opts.scroll ? doc.getElementById(opts.scroll) : null;
+        if (anchor) anchor.scrollIntoView({ block: "start" });
+        else if (opts.changed) window.scrollTo(0, 0);
+
+        // 화면이 바뀌면 제목으로 초점을 옮겨 키보드·화면낭독기 사용자가 위치를 알 수 있게 한다
+        if (opts.focusHeading) {
+          var heading = section.querySelector("h1");
+          if (heading) heading.focus({ preventScroll: true });
+        }
+      }
+
+      function showView(id, opts) {
+        opts = opts || {};
+        var targetId = validIds.indexOf(id) !== -1 ? id : "home";
+        opts.changed = targetId !== currentId;
+        if (opts.changed) pauseAllMedia();
+
+        var first = currentId === null;
+        currentId = targetId;
+        opts.focusHeading = opts.changed && !first && !opts.keepFocus;
+
+        if (opts.changed && !first && canTransition && !reduceMotion.matches) {
+          doc.startViewTransition(function () { applyView(targetId, opts); });
+        } else {
+          applyView(targetId, opts);
+        }
+
+        if (opts.push && location.hash !== "#" + targetId) {
+          try { history.pushState(null, "", "#" + targetId); } catch (e) { location.hash = targetId; }
+        }
+      }
+
+      // 갤러리 크게 보기
+      var galleryCards = Array.prototype.slice.call(doc.querySelectorAll("#galleryGrid .gallery-card"));
+      var lightbox = doc.getElementById("lightboxModal");
+      var lightboxImg = doc.getElementById("lightboxImg");
+      var lightboxTitle = doc.getElementById("lightboxTitle");
+      var lightboxDesc = doc.getElementById("lightboxDesc");
+      var lightboxCount = doc.getElementById("lightboxCount");
+      var blankPixel = lightboxImg.getAttribute("src");
+      var currentIdx = 0;
+
+      function pad(n) { return (n < 10 ? "0" : "") + n; }
+
+      function showPhoto(idx) {
+        var total = galleryCards.length;
+        currentIdx = (idx + total) % total;
+        var card = galleryCards[currentIdx];
+        lightboxImg.src = card.getAttribute("data-full");
+        lightboxImg.alt = card.querySelector("img").alt;
+        lightboxTitle.textContent = card.getAttribute("data-name");
+        lightboxDesc.textContent = card.getAttribute("data-desc") || "";
+        lightboxCount.innerHTML = "<b>" + pad(currentIdx + 1) + "</b> / " + pad(total);
+        // 좌우 사진을 미리 받아 넘길 때 끊기지 않게 한다
+        [currentIdx - 1, currentIdx + 1].forEach(function (n) {
+          new Image().src = galleryCards[(n + total) % total].getAttribute("data-full");
+        });
+      }
+
+      function openLightbox(idx) {
+        showPhoto(idx);
+        if (!lightbox.open) lightbox.showModal();
+      }
+
+      lightbox.addEventListener("close", function () { lightboxImg.src = blankPixel; });
+      // 바깥(어두운 배경)을 누르면 닫힌다
+      function closeOnBackdrop(dialog) {
+        dialog.addEventListener("click", function (event) {
+          if (event.target !== dialog) return;
+          var box = (dialog.firstElementChild && dialog === lightbox ? dialog.firstElementChild : dialog).getBoundingClientRect();
+          var inside = event.clientX >= box.left && event.clientX <= box.right && event.clientY >= box.top && event.clientY <= box.bottom;
+          if (!inside) dialog.close();
+        });
+      }
+      closeOnBackdrop(lightbox);
+      doc.getElementById("lightboxClose").addEventListener("click", function () { lightbox.close(); });
+      doc.getElementById("lightboxPrev").addEventListener("click", function () { showPhoto(currentIdx - 1); });
+      doc.getElementById("lightboxNext").addEventListener("click", function () { showPhoto(currentIdx + 1); });
+
+      // 손가락으로 좌우로 밀어 넘기기
+      var stage = doc.getElementById("lightboxStage");
+      var swipeStart = null;
+      stage.addEventListener("pointerdown", function (event) {
+        if (event.pointerType === "mouse" || event.target.closest("button")) return;
+        swipeStart = { x: event.clientX, y: event.clientY };
+      });
+      stage.addEventListener("pointerup", function (event) {
+        if (!swipeStart) return;
+        var dx = event.clientX - swipeStart.x;
+        var dy = event.clientY - swipeStart.y;
+        swipeStart = null;
+        if (Math.abs(dx) > 44 && Math.abs(dx) > Math.abs(dy) * 1.4) showPhoto(currentIdx + (dx < 0 ? 1 : -1));
+      });
+      stage.addEventListener("pointercancel", function () { swipeStart = null; });
+
+      doc.getElementById("galleryGrid").addEventListener("click", function (event) {
+        var card = event.target.closest(".gallery-card");
+        if (card) openLightbox(parseInt(card.getAttribute("data-index"), 10) || 0);
+      });
+
+      // 재생 안내
+      var helpModal = doc.getElementById("helpModal");
+      doc.getElementById("helpClose").addEventListener("click", function () { helpModal.close(); });
+      closeOnBackdrop(helpModal);
+
+      doc.addEventListener("click", function (event) {
+        var helpBtn = event.target.closest("[data-open-help]");
+        if (helpBtn) {
+          pauseAllMedia();
+          helpModal.showModal();
+          return;
+        }
+
+        var photoBtn = event.target.closest("[data-open-photo]");
+        if (photoBtn) {
+          openLightbox(parseInt(photoBtn.getAttribute("data-open-photo"), 10) || 0);
+          return;
+        }
+
+        var link = event.target.closest("a[data-nav]");
+        if (!link) return;
+        event.preventDefault();
+        var photoIdx = link.getAttribute("data-photo");
+        var hasPhoto = photoIdx !== null && photoIdx !== "";
+
+        showView(link.getAttribute("data-nav"), {
+          push: true,
+          accordion: link.getAttribute("data-accordion"),
+          scroll: link.getAttribute("data-scroll"),
+          keepFocus: hasPhoto
+        });
+
+        // 하위 메뉴에서 고른 뒤에는 메뉴가 닫히도록 초점을 뗀다
+        if (link.closest(".dropdown-panel") && doc.activeElement === link) link.blur();
+        if (hasPhoto) openLightbox(parseInt(photoIdx, 10) || 0);
+      });
+
+      window.addEventListener("hashchange", function () {
+        showView((location.hash || "#home").replace("#", ""));
+      });
+
+      doc.addEventListener("keydown", function (event) {
+        if (lightbox.open) {
+          if (event.key === "ArrowLeft") showPhoto(currentIdx - 1);
+          else if (event.key === "ArrowRight") showPhoto(currentIdx + 1);
+        } else if (event.key === "Escape" && doc.activeElement && doc.activeElement.closest(".nav-group")) {
+          doc.activeElement.blur(); // Esc로 하위 메뉴 닫기
+        }
+      });
+
+      showView((location.hash || "#home").replace("#", ""));
+    })();
+  </script>
+</body>
+</html>

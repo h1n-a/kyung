@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>경복궁 · 조선 법궁 문화유산 안내</title>
+
+  
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <link rel="stylesheet" href="style.css">
+
+  
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+  <script>
+    (function ($) {
+      // 페이지 안의 audio, video, 유튜브 iframe을 모두 일시정지
+      function pauseMedia($scope) {
+        $scope.find("audio, video").each(function () {
+          try { this.pause(); } catch (e) {}
+        });
+        $scope.find("iframe[data-youtube]").each(function () {
+          if (this.contentWindow) {
+            this.contentWindow.postMessage(
+              JSON.stringify({ event: "command", func: "pauseVideo", args: [] }), "*"
+            );
+          }
+        });
+      }
+
+      // 페이지가 숨겨지기 직전, 떠나는 페이지의 미디어를 정지
+      $(document).on("pagecontainerbeforehide", function (event, ui) {
+        var $leaving = (ui && ui.prevPage && ui.prevPage.length)
+          ? ui.prevPage
+          : $(":mobile-pagecontainer").pagecontainer("getActivePage");
+        if ($leaving && $leaving.length) { pauseMedia($leaving); }
+      });
+
+      // 새 미디어를 재생하면 다른 audio/video는 멈춤
+      document.addEventListener("play", function (event) {
+        $("audio, video").not(event.target).each(function () { this.pause(); });
+      }, true);
+    })(jQuery);
+
+    // ---------- 갤러리: 이벤트 위임으로 팝업 열기 ----------
+    (function ($) {
+      $(document).on("click", "#gallery .gallery-item", function (event) {
+        event.preventDefault();
+        var $item = $(this);
+        var $popup = $("#photoPopup");
+        var $img = $popup.find(".popup-img");
+
+        $img.off("load.gallery").on("load.gallery", function () {
+          if ($popup.parent().hasClass("ui-popup-active")) {
+            $popup.popup("reposition", { positionTo: "window" });
+          }
+        });
+        $img.attr({
+          src: $item.attr("href"),
+          alt: $item.data("name") + " 원본 사진"
+        });
+        $popup.find(".popup-caption").text($item.data("caption"));
+        $popup.popup("open");
+      });
+
+      $(document).on("popupbeforeposition", "#photoPopup", function () {
+        var maxH = $(window).height() - 170;
+        var maxW = $(window).width() - 50;
+        $(this).find(".popup-img").css({ "max-height": maxH, "max-width": maxW });
+      });
+
+      $(document).on("popupafterclose", "#photoPopup", function () {
+        $(this).find(".popup-img").removeAttr("src");
+      });
+    })(jQuery);
+  </script>
+</head>
+<body>
+
+  <!-- ========== 홈 ========== -->
+  <div data-role="page" id="home">
+    <div data-role="header" data-theme="b">
+      <h1>경복궁</h1>
+    </div>
+
+    <div role="main" class="ui-content">
+      <div class="hero">
+        <img src="imges/scene-01.jpg" alt="경복궁 광화문 야경 전경">
+        <div class="hero-caption">
+          <h2>조선의 법궁, 경복궁</h2>
+          <p>600년 역사가 숨 쉬는 서울의 대표 궁궐을 만나보세요</p>
+        </div>
+      </div>
+
+      <p class="lead">태조 4년(1395)에 창건된 조선 왕조의 으뜸 궁궐, 경복궁의 역사와 주요 전각, 영상과 음악, 사계절 풍경을 한눈에 둘러보실 수 있습니다.</p>
+
+      <ul data-role="listview" class="menu-list">
+        <li><a href="#intro" data-transition="slide">궁궐 소개</a></li>
+        <li><a href="#movie" data-transition="slide">경복궁 영상</a></li>
+        <li><a href="#music1" data-transition="slide">궁궐 테마 음악 ① · HAECHI</a></li>
+        <li><a href="#music2" data-transition="slide">궁궐 테마 음악 ② · 궁궐의 선율</a></li>
+        <li><a href="#gallery" data-transition="slide">경복궁 갤러리</a></li>
+      </ul>
+
+      <div class="info-card">
+        <span class="info-badge">관람 안내</span>
+        <p>서울특별시 종로구 사직로 161 · 매주 화요일 휴궁. 계절별 관람 시간과 야간 특별 관람 일정은 방문 전 경복궁 공식 안내를 확인해 주세요.</p>
+      </div>
+    </div>
+
+    <div data-role="footer">
+      <p>경복궁 · 조선의 법궁 문화유산 안내</p>
+    </div>
+  </div>
+
+  <!-- ========== 궁궐 소개 ========== -->
+  <div data-role="page" id="intro">
+    <div data-role="header" data-theme="b">
+      <a href="#home" data-rel="back" data-direction="reverse" data-icon="carat-l" data-iconpos="notext" class="ui-btn-left">홈으로</a>
+      <h1>궁궐 소개</h1>
+    </div>
+
+    <div role="main" class="ui-content">
+      <h2 class="intro-title">경복궁(景福宮)</h2>
+      <p class="intro-sub">조선 왕조 제일의 법궁으로, '큰 복을 누리며 번영하라'는 뜻을 담고 있습니다. 항목을 눌러 자세한 이야기를 확인해 보세요.</p>
+
+      <div data-role="collapsible-set" data-inset="true">
+
+        <div data-role="collapsible" data-collapsed="false">
+          <h3>역사</h3>
+          <ul>
+            <li><strong>1395년</strong> 태조 이성계가 한양으로 도읍을 옮긴 뒤 가장 먼저 세운 조선의 정궁입니다.</li>
+            <li><strong>임진왜란</strong>으로 대부분의 전각이 소실되어 약 270년간 빈터로 남아 있었습니다.</li>
+            <li><strong>1867년</strong> 고종 때 흥선대원군의 주도로 중건되며 왕실의 권위를 되찾았습니다.</li>
+            <li>일제강점기에 많은 전각이 훼손되었으나, 현재 단계적인 복원 사업이 꾸준히 이어지고 있습니다.</li>
+          </ul>
+        </div>
+
+        <div data-role="collapsible">
+          <h3>주요 건축물</h3>
+          <ul>
+            <li><strong>광화문</strong> 경복궁의 정문으로, 서울 도심과 궁궐을 잇는 상징적인 문입니다.</li>
+            <li><strong>근정전</strong> 왕의 즉위식과 주요 국가 의식이 거행되던 정전으로, 국보로 지정되어 있습니다.</li>
+            <li><strong>경회루</strong> 넓은 연못 위에 세워진 누각으로, 나라의 큰 연회와 사신 접대가 열리던 곳입니다.</li>
+            <li><strong>향원정</strong> 연못 한가운데 섬에 세워진 육각형 정자로, 후원의 단아한 아름다움을 보여 줍니다.</li>
+          </ul>
+        </div>
+
+        <div data-role="collapsible">
+          <h3>관람 예절</h3>
+          <ul>
+            <li>전각의 기둥, 담장, 석조물은 소중한 문화유산이므로 손으로 만지거나 기대지 않습니다.</li>
+            <li>지정된 관람 동선을 따르고, 출입 제한 구역에는 들어가지 않습니다.</li>
+            <li>모든 관람객이 고즈넉한 궁궐의 정취를 느낄 수 있도록 정숙을 유지해 주세요.</li>
+            <li>휴궁일과 계절별 입장 마감 시간은 방문 전 공식 안내에서 미리 확인하세요.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div data-role="footer">
+      <p>경복궁 · 조선의 법궁 문화유산 안내</p>
+    </div>
+  </div>
+
+  <!-- ========== 영상 ========== -->
+  <div data-role="page" id="movie">
+    <div data-role="header" data-theme="b">
+      <a href="#home" data-rel="back" data-direction="reverse" data-icon="carat-l" data-iconpos="notext" class="ui-btn-left">홈으로</a>
+      <h1>경복궁 영상</h1>
+    </div>
+
+    <div role="main" class="ui-content">
+      <h2 class="page-title">경복궁 영상 감상</h2>
+      <p class="note-box">하늘에서 바라본 경복궁의 웅장한 전경과 전각 풍경</p>
+
+      <p class="section-label">4K 드론 항공 영상</p>
+      <video class="local-video" controls preload="metadata" playsinline poster="assets/광화문.jpg">
+        <source src="assets/[4K Drone] GyeongBokGung Palace.mp4" type="video/mp4">
+        이 브라우저는 video 태그를 지원하지 않습니다.
+      </video>
+
+      <p class="section-label">경복궁 전각 하이라이트</p>
+      <video class="local-video" controls preload="metadata" playsinline poster="assets/scene-04.jpg">
+        <source src="assets/palace-tour.mp4" type="video/mp4">
+        이 브라우저는 video 태그를 지원하지 않습니다.
+      </video>
+
+      <p class="section-label">유튜브 탐방 영상</p>
+      <div class="video-wrap">
+        <iframe data-youtube
+                src="https://www.youtube-nocookie.com/embed/Itb11ME3cSY?enablejsapi=1&amp;rel=0"
+                title="경복궁 4K 도보 탐방 영상"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+      </div>
+      <a href="https://www.youtube.com/watch?v=Itb11ME3cSY" target="_blank" rel="noopener" class="help-link">유튜브에서 직접 보기 ↗</a>
+
+      <p class="caption">재생 버튼을 눌러 감상하세요. 다른 화면으로 이동하면 재생 중인 영상이 자동으로 멈춥니다.</p>
+      <a href="#media-help" data-rel="dialog" data-transition="slide" class="help-link">재생 안내 보기</a>
+
+      <div class="nav-row">
+        <a href="#home" data-transition="slide" data-direction="reverse" class="ui-btn ui-corner-all">이전 · 홈</a>
+        <a href="#music1" data-transition="slide" class="ui-btn ui-corner-all">다음 · 음악</a>
+      </div>
+    </div>
+
+    <div data-role="footer">
+      <p>경복궁 · 조선의 법궁 문화유산 안내</p>
+    </div>
+  </div>
+
+  <!-- ========== 음악 1 ========== -->
+  <div data-role="page" id="music1">
+    <div data-role="header" data-theme="b">
+      <a href="#home" data-rel="back" data-direction="reverse" data-icon="carat-l" data-iconpos="notext" class="ui-btn-left">홈으로</a>
+      <h1>테마 음악 ①</h1>
+    </div>
+
+    <div role="main" class="ui-content">
+      <h2 class="page-title">궁궐 테마 음악 ① · HAECHI</h2>
+      <p class="note-box">경복궁을 거닐며 감상하는 대표 테마곡 (4:01)</p>
+
+      <audio controls preload="metadata">
+        <source src="imges/HAECHI.mp3" type="audio/mpeg">
+        이 브라우저는 audio 태그를 지원하지 않습니다.
+      </audio>
+
+      <img class="cover" src="assets/scene-02.jpg" alt="경복궁 근정전 전경">
+      <p class="caption">조선 왕실의 위엄과 궁궐의 고즈넉한 울림을 담은 테마곡입니다. 이어폰과 함께 감상하시면 더욱 생생합니다.</p>
+      <a href="#media-help" data-rel="dialog" data-transition="slide" class="help-link">재생 안내 보기</a>
+
+      <div class="nav-row">
+        <a href="#home" data-transition="slide" data-direction="reverse" class="ui-btn ui-corner-all">이전 · 홈</a>
+        <a href="#music2" data-transition="slide" class="ui-btn ui-corner-all">다음 음악</a>
+      </div>
+    </div>
+
+    <div data-role="footer">
+      <p>경복궁 · 조선의 법궁 문화유산 안내</p>
+    </div>
+  </div>
+
+  <!-- ========== 음악 2 ========== -->
+  <div data-role="page" id="music2">
+    <div data-role="header" data-theme="b">
+      <a href="#home" data-rel="back" data-direction="reverse" data-icon="carat-l" data-iconpos="notext" class="ui-btn-left">홈으로</a>
+      <h1>테마 음악 ②</h1>
+    </div>
+
+    <div role="main" class="ui-content">
+      <h2 class="page-title">궁궐 테마 음악 ② · 궁궐의 선율</h2>
+      <p class="note-box">경회루와 후원의 고요한 정취를 담은 선율</p>
+
+      <audio controls preload="metadata">
+        <source src="assets/palace-melody-2.mp3" type="audio/mpeg">
+        이 브라우저는 audio 태그를 지원하지 않습니다.
+      </audio>
+
+      <img class="cover" src="assets/scene-03.jpg" alt="경복궁 경회루 전경">
+      <p class="caption">연못에 비친 누각과 바람 소리를 떠올리게 하는 차분한 궁궐 배경 음악입니다.</p>
+      <a href="#media-help" data-rel="dialog" data-transition="slide" class="help-link">재생 안내 보기</a>
+
+      <div class="nav-row">
+        <a href="#music1" data-transition="slide" data-direction="reverse" class="ui-btn ui-corner-all">이전 음악</a>
+        <a href="#gallery" data-transition="slide" class="ui-btn ui-corner-all">다음 · 갤러리</a>
+      </div>
+    </div>
+
+    <div data-role="footer">
+      <p>경복궁 · 조선의 법궁 문화유산 안내</p>
+    </div>
+  </div>
+
+  <!-- ========== 갤러리 ========== -->
+  <div data-role="page" id="gallery">
+    <div data-role="header" data-theme="b">
+      <a href="#home" data-transition="slide" data-direction="reverse" class="ui-btn ui-btn-left ui-btn-inline ui-corner-all home-btn">홈</a>
+      <h1>경복궁 갤러리</h1>
+    </div>
+
+    <div role="main" class="ui-content">
+      <p class="gallery-lead">경복궁의 주요 전각과 풍경 12선입니다. 사진을 누르면 큰 화면으로 자세히 감상할 수 있습니다.</p>
+
+      <div class="gallery-grid">
+        <a href="assets/광화문.jpg" class="gallery-item" data-ajax="false" data-name="광화문" data-caption="01 · 광화문">
+          <span class="gallery-thumb"><img src="assets/광화문.jpg" alt="경복궁 광화문 전경" loading="lazy"></span>
+          <span class="gallery-caption">01 · 광화문</span>
+        </a>
+        <a href="assets/scene-02.jpg" class="gallery-item" data-ajax="false" data-name="근정전" data-caption="02 · 근정전">
+          <span class="gallery-thumb"><img src="assets/scene-02.jpg" alt="경복궁 근정전 전경" loading="lazy"></span>
+          <span class="gallery-caption">02 · 근정전</span>
+        </a>
+        <a href="assets/scene-03.jpg" class="gallery-item" data-ajax="false" data-name="경회루" data-caption="03 · 경회루">
+          <span class="gallery-thumb"><img src="assets/scene-03.jpg" alt="경복궁 경회루와 연못" loading="lazy"></span>
+          <span class="gallery-caption">03 · 경회루</span>
+        </a>
+        <a href="assets/scene-04.jpg" class="gallery-item" data-ajax="false" data-name="향원정" data-caption="04 · 향원정">
+          <span class="gallery-thumb"><img src="assets/scene-04.jpg" alt="경복궁 향원정과 연못" loading="lazy"></span>
+          <span class="gallery-caption">04 · 향원정</span>
+        </a>
+        <a href="assets/scene-05.jpg" class="gallery-item" data-ajax="false" data-name="흥례문" data-caption="05 · 흥례문">
+          <span class="gallery-thumb"><img src="assets/scene-05.jpg" alt="경복궁 흥례문 전경" loading="lazy"></span>
+          <span class="gallery-caption">05 · 흥례문</span>
+        </a>
+        <a href="assets/scene-06.jpg" class="gallery-item" data-ajax="false" data-name="궁궐 담장" data-caption="06 · 궁궐 담장">
+          <span class="gallery-thumb"><img src="assets/scene-06.jpg" alt="경복궁 전통 꽃담과 산책로" loading="lazy"></span>
+          <span class="gallery-caption">06 · 궁궐 담장</span>
+        </a>
+        <a href="assets/scene-07.jpg" class="gallery-item" data-ajax="false" data-name="영제교" data-caption="07 · 영제교">
+          <span class="gallery-thumb"><img src="assets/scene-07.jpg" alt="경복궁 영제교와 금천" loading="lazy"></span>
+          <span class="gallery-caption">07 · 영제교</span>
+        </a>
+        <a href="assets/scene-08.jpg" class="gallery-item" data-ajax="false" data-name="자경전" data-caption="08 · 자경전">
+          <span class="gallery-thumb"><img src="assets/scene-08.jpg" alt="경복궁 자경전 전경" loading="lazy"></span>
+          <span class="gallery-caption">08 · 자경전</span>
+        </a>
+        <a href="assets/scene-09.jpg" class="gallery-item" data-ajax="false" data-name="교태전" data-caption="09 · 교태전">
+          <span class="gallery-thumb"><img src="assets/scene-09.jpg" alt="경복궁 교태전 전경" loading="lazy"></span>
+          <span class="gallery-caption">09 · 교태전</span>
+        </a>
+        <a href="assets/scene-10.jpg" class="gallery-item" data-ajax="false" data-name="수정전" data-caption="10 · 수정전">
+          <span class="gallery-thumb"><img src="assets/scene-10.jpg" alt="경복궁 수정전 전경" loading="lazy"></span>
+          <span class="gallery-caption">10 · 수정전</span>
+        </a>
+        <a href="assets/scene-11.jpg" class="gallery-item" data-ajax="false" data-name="건청궁" data-caption="11 · 건청궁">
+          <span class="gallery-thumb"><img src="assets/scene-11.jpg" alt="경복궁 건청궁 전경" loading="lazy"></span>
+          <span class="gallery-caption">11 · 건청궁</span>
+        </a>
+        <a href="assets/scene-12.jpg" class="gallery-item" data-ajax="false" data-name="집옥재" data-caption="12 · 집옥재">
+          <span class="gallery-thumb"><img src="assets/scene-12.jpg" alt="경복궁 집옥재와 팔우정" loading="lazy"></span>
+          <span class="gallery-caption">12 · 집옥재</span>
+        </a>
+      </div>
+    </div>
+
+    <div data-role="footer">
+      <p>경복궁 · 조선의 법궁 문화유산 안내</p>
+    </div>
+
+    <!-- 사진 확대 팝업 -->
+    <div data-role="popup" id="photoPopup" data-overlay-theme="b" data-theme="none"
+         data-corners="false" data-position-to="window" data-transition="fade">
+      <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">닫기</a>
+      <div class="popup-body">
+        <img class="popup-img" alt="">
+        <p class="popup-caption"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 재생 안내 (dialog) ========== -->
+  <div data-role="page" id="media-help">
+    <div data-role="header" data-theme="b">
+      <h1>재생 안내</h1>
+    </div>
+
+    <div role="main" class="ui-content">
+      <ul>
+        <li>모바일 브라우저에서는 소리가 포함된 미디어가 자동 재생되지 않으므로 재생 버튼을 직접 눌러 주세요.</li>
+        <li>다른 화면으로 이동하거나 이 안내 창을 열면 재생 중인 영상과 음악이 자동으로 일시정지됩니다.</li>
+        <li>영상과 음악은 한 번에 하나씩만 재생됩니다.</li>
+      </ul>
+      <a href="#" data-rel="back" class="ui-btn ui-corner-all">닫기</a>
+    </div>
+  </div>
+
+</body>
+</html>

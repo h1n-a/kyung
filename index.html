@@ -160,6 +160,7 @@
 
     <!-- ========== 홈 ========== -->
     <section id="home" class="view-section is-active" aria-label="경복궁 홈" data-title="">
+      <div class="hero-track" id="heroTrack">
       <div class="hero">
         <div class="hero-scene" id="heroScene">
           <img src="assets/web/hero-night-1600.jpg"
@@ -169,8 +170,19 @@
                alt="푸른 밤하늘 아래 은은한 조명이 켜진 서울 경복궁 광화문 야경">
         </div>
 
+        <!-- 스크롤로 걸어서 지나가는 장소들이 여기에 한 층씩 놓인다 (hero-walk.js). 평소에는 보이지 않는다 -->
+        <div class="walk-layers" id="walkLayers" aria-hidden="true"></div>
+        <div class="gate-doors" id="gateDoors" aria-hidden="true">
+          <span class="gate-leaf gate-leaf--left"></span>
+          <span class="gate-leaf gate-leaf--right"></span>
+        </div>
+
         <div class="hero-copy">
           <h1 class="hero-title" tabindex="-1">서울의 밤을 비추는 조선의 법궁</h1>
+          <p class="scroll-hint" id="scrollHint" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 6 6 6 6-6M6 13l6 6 6-6"/></svg>
+            스크롤을 내려보세요
+          </p>
         </div>
 
         <!-- 장식용 세로 글귀: 내용은 궁궐 소개 화면에 그대로 있다 -->
@@ -191,6 +203,18 @@
           </div>
           <p class="hero-credit">사진 출처: 국가유산청 (공공누리 제1유형)</p>
         </div>
+
+        <div class="walk-caption" id="walkCaption">
+          <div class="wrap">
+            <p class="walk-count"><b>02</b> / 12</p>
+            <h2></h2>
+            <p class="walk-desc"></p>
+            <p class="walk-credit" hidden></p>
+          </div>
+        </div>
+        <a class="walk-skip" id="walkSkip" href="#visitTitle">둘러보기 건너뛰기</a>
+        <span class="walk-progress" id="walkProgress" aria-hidden="true"></span>
+      </div>
       </div>
 
       <div class="wrap">
@@ -255,7 +279,10 @@
     </section>
 
     <!-- ========== 궁궐 소개 ========== -->
-    <section id="intro" class="view-section page" aria-label="궁궐 소개" data-title="궁궐 소개">
+    <section id="intro" class="view-section page has-banner" aria-label="궁궐 소개" data-title="궁궐 소개">
+      <div class="page-banner" data-depth="assets/web/inner-night-1920" data-ratio="1.5" data-pos="0.6" data-plain>
+        <img src="assets/web/inner-night-1920.jpg" width="1920" height="1280" alt="" decoding="async" style="object-position: 50% 60%">
+      </div>
       <div class="wrap">
         <div class="page-head">
           <h1 tabindex="-1">경복궁<span class="hanja" lang="ko-Hani">景福宮</span></h1>
@@ -343,7 +370,10 @@
     </section>
 
     <!-- ========== 영상 ========== -->
-    <section id="movie" class="view-section page" aria-label="경복궁 영상" data-title="경복궁 영상">
+    <section id="movie" class="view-section page has-banner" aria-label="경복궁 영상" data-title="경복궁 영상">
+      <div class="page-banner" data-depth="assets/web/walk-05" data-ratio="1.339" data-pos="0.36">
+        <img src="assets/web/walk-05.jpg" width="1800" height="1344" alt="" decoding="async" style="object-position: 50% 36%">
+      </div>
       <div class="wrap">
         <div class="page-head">
           <h1 tabindex="-1">경복궁 영상</h1>
@@ -431,7 +461,7 @@
         </div>
 
         <div class="music-layout">
-          <div class="music-cover">
+          <div class="music-cover" data-depth="assets/web/walk-07" data-ratio="1.339" data-pos="0.5" data-plain>
             <img src="assets/web/07-yeongjegyo.jpg" width="1200" height="896" alt="경복궁 영제교 난간과 금천을 지키는 돌짐승 석상" decoding="async">
             <span class="eq" aria-hidden="true"><span class="eq-bars"><i></i><i></i><i></i><i></i></span>재생 중</span>
           </div>
@@ -472,7 +502,7 @@
         </div>
 
         <div class="music-layout">
-          <div class="music-cover">
+          <div class="music-cover" data-depth="assets/web/walk-03" data-ratio="1.339" data-pos="0.5" data-plain>
             <img src="assets/web/03-gyeonghoeru.jpg" width="1200" height="896" alt="연못에 비친 경복궁 경회루" decoding="async">
             <span class="eq" aria-hidden="true"><span class="eq-bars"><i></i><i></i><i></i><i></i></span>재생 중</span>
           </div>
@@ -505,7 +535,10 @@
     </section>
 
     <!-- ========== 갤러리 ========== -->
-    <section id="gallery" class="view-section page" aria-label="경복궁 갤러리" data-title="경복궁 갤러리">
+    <section id="gallery" class="view-section page has-banner" aria-label="경복궁 갤러리" data-title="경복궁 갤러리">
+      <div class="page-banner" data-depth="assets/web/walk-04" data-ratio="1.339" data-pos="0.42">
+        <img src="assets/web/walk-04.jpg" width="1800" height="1344" alt="" decoding="async" style="object-position: 50% 42%">
+      </div>
       <div class="wrap">
         <div class="page-head">
           <h1 tabindex="-1">경복궁 갤러리</h1>
@@ -914,5 +947,8 @@
       showView((location.hash || "#home").replace("#", ""));
     })();
   </script>
+  <script src="hero-3d.js" defer></script>
+  <script src="hero-walk.js" defer></script>
+  <script src="page-fx.js" defer></script>
 </body>
 </html>

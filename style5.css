@@ -440,7 +440,17 @@ html:not(.vt) .view-section.is-active { animation: view-in 0.4s var(--ease-out) 
   object-position: 50% 62%;
 }
 
+/* 입체 효과용 캔버스: 사진 위에 같은 크기로 겹친다 (hero-3d.js) */
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 .hero-copy {
+  translate: calc(var(--look-x, 0) * -22px) calc(var(--look-y, 0) * -12px);
   position: absolute;
   inset: 0 0 auto 0;
   z-index: 2;
@@ -459,6 +469,7 @@ html:not(.vt) .view-section.is-active { animation: view-in 0.4s var(--ease-out) 
 
 /* 주련: 전각 기둥에 세로로 거는 글귀처럼 광화문 양옆 하늘에 세운다 */
 .hero-couplet {
+  translate: calc(var(--look-x, 0) * -36px) calc(var(--look-y, 0) * -16px);
   display: none;
   position: absolute;
   top: calc(var(--hh) * 0.3);
@@ -507,6 +518,142 @@ html:not(.vt) .view-section.is-active { animation: view-in 0.4s var(--ease-out) 
   gap: 0.7rem;
 }
 .hero-credit { margin-top: 1.1rem; color: var(--ink-3); font-size: 0.8rem; }
+
+/* ---------- 홈: 스크롤로 12곳을 걸어서 지나가기 (hero-walk.js) ----------
+   스크립트가 .hero-track 에 is-journey 를 붙였을 때만 켜진다. */
+.walk-layers, .gate-doors, .walk-caption, .scroll-hint, .walk-skip, .walk-progress { display: none; }
+
+.hero-track.is-journey { margin-top: calc(var(--header-h) * -1); }
+.is-journey .hero {
+  --dock: calc(4.1rem + env(safe-area-inset-bottom, 0px));   /* 휴대폰 하단 탭이 가리는 높이 */
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  margin-top: 0;
+  overflow: clip;
+  background: var(--night-950);
+}
+.is-journey .hero-scene { will-change: transform; }
+.is-journey .hero-copy, .is-journey .hero-foot, .is-journey .hero-couplet { z-index: 4; }
+
+/* 장소마다 한 층씩 쌓아 두고, 지금 보이는 곳과 다음 곳만 켠다 */
+.is-journey .walk-layers { display: block; position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.walk-scene { position: absolute; inset: 0; overflow: clip; visibility: hidden; }
+.walk-pic { position: absolute; inset: 0; will-change: transform; }
+.walk-pic img, .walk-pic canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+/* 색 보정: 입체 화면은 직접 보정해 그리고, 입체 화면이 없을 때 보이는 원래 사진은 여기서 어둡게 맞춘다 */
+.walk-pic img { object-fit: cover; filter: brightness(calc(0.74 * var(--light, 1))) saturate(0.84) contrast(1.05); }
+.walk-scene.is-night .walk-pic img { filter: brightness(var(--light, 1)); }
+.walk-pic.has-3d img { visibility: hidden; }
+
+/* 광화문 문짝 */
+.is-journey .gate-doors {
+  display: block;
+  position: absolute;
+  z-index: 3;
+  visibility: hidden;
+  perspective: 700px;
+  filter: brightness(0.86) saturate(1.06) contrast(1.03);   /* 야경 사진과 같은 색 보정 */
+}
+.gate-leaf {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background-image: url("assets/web/hero-night-2400.jpg");
+  background-repeat: no-repeat;
+}
+.gate-leaf--left { left: 0; transform-origin: left center; }
+.gate-leaf--right { right: 0; transform-origin: right center; }
+.is-walking .gate-doors { visibility: visible; }
+
+/* 장소 이름과 설명 */
+.is-journey .walk-caption {
+  display: block;
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 5;
+  padding: 7rem 0 calc(var(--dock) + 1.75rem);
+  background: linear-gradient(180deg, transparent, oklch(10% 0.03 262 / 0.86) 62%);
+  opacity: 0;
+  pointer-events: none;
+}
+.walk-count { color: var(--ink-2); font-size: 0.92rem; font-variant-numeric: tabular-nums; }
+.walk-count b { color: var(--lantern-bright); font-weight: 600; }
+.walk-caption h2 {
+  margin-top: 0.15rem;
+  font-size: clamp(2.3rem, 1.2rem + 4.4vw, 4.2rem);
+  text-shadow: 0 2px 26px oklch(10% 0.05 262 / 0.7);
+}
+.walk-desc { margin-top: 0.5rem; max-width: 34rem; color: var(--ink); font-size: clamp(1rem, 0.92rem + 0.35vw, 1.12rem); }
+.walk-credit { margin-top: 0.7rem; color: var(--ink-3); font-size: 0.8rem; }
+
+/* 얼마나 왔는지 보여 주는 가는 금색 줄 */
+.is-journey .walk-progress {
+  display: block;
+  position: absolute;
+  inset: auto 0 var(--dock) 0;
+  z-index: 6;
+  height: 2px;
+  background: var(--lantern);
+  transform: scaleX(0);
+  transform-origin: left;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.is-walking .walk-progress { opacity: 1; }
+
+.is-journey .walk-skip {
+  display: inline-flex;
+  align-items: center;
+  position: absolute;
+  top: calc(var(--header-h) + 0.25rem);
+  right: var(--gutter);
+  z-index: 6;
+  min-height: 44px;
+  color: var(--ink-2);
+  font-size: 0.88rem;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-shadow: 0 1px 10px oklch(10% 0.04 262 / 0.9);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, color 0.2s ease;
+}
+.is-walking .walk-skip { opacity: 1; pointer-events: auto; }
+.walk-skip:hover { color: var(--lantern-bright); }
+
+/* 처음에 잠깐 뜨는 작은 안내 */
+.is-journey .scroll-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: clamp(1rem, 2.4vh, 1.75rem);
+  padding: 0.75rem 1.3rem 0.75rem 1.05rem;
+  border-radius: 12px;
+  background: oklch(15% 0.045 262 / 0.82);
+  border: 1px solid var(--lantern-line);
+  box-shadow: var(--shadow-soft);
+  color: var(--ink);
+  font-size: 1.02rem;
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: hint-in 0.8s var(--ease-out) 1.6s both;
+}
+.scroll-hint svg { width: 20px; height: 20px; color: var(--lantern-bright); animation: hint-bob 1.4s ease-in-out 2.4s infinite; }
+.scroll-hint.is-gone { animation: none; opacity: 0; transform: translateY(8px); transition: opacity 0.3s ease, transform 0.3s ease; }
+@keyframes hint-in { from { opacity: 0; transform: translateY(14px); } }
+@keyframes hint-bob { 50% { transform: translateY(4px); } }
+
+/* 장면이 화면에 붙어 있는 동안에는 상단 메뉴에 바탕을 깔지 않는다 */
+.in-journey .site-header.is-stuck {
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-bottom-color: transparent;
+}
+.in-journey .site-header.is-stuck::before { opacity: 1; }
 
 /* 관람 안내 */
 .visit {
@@ -862,7 +1009,7 @@ html:not(.vt) .view-section.is-active { animation: view-in 0.4s var(--ease-out) 
   box-shadow: 0 0 0 1px var(--line), var(--shadow-deep);
   transition: box-shadow 0.6s ease;
 }
-.music-cover img {
+.music-cover img, .music-cover canvas {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -871,7 +1018,7 @@ html:not(.vt) .view-section.is-active { animation: view-in 0.4s var(--ease-out) 
 }
 /* 재생 중: 조명이 켜지듯 표지가 밝아진다 */
 .is-playing .music-cover { box-shadow: 0 0 0 1px var(--lantern-line), 0 26px 70px -22px oklch(83% 0.125 80 / 0.5); }
-.is-playing .music-cover img { filter: none; transform: scale(1.04); }
+.is-playing .music-cover img, .is-playing .music-cover canvas { filter: none; transform: scale(1.04); }
 
 .eq {
   position: absolute;
@@ -1112,6 +1259,10 @@ dialog[open]::backdrop { animation: backdrop-in 0.25s ease both; }
   body { padding-bottom: 0; }
 
   :root { --header-h: 4.75rem; }
+  .is-journey .hero { --dock: 0px; }
+  .is-journey .walk-caption { padding-bottom: 3rem; }
+  .is-journey .walk-skip { top: auto; bottom: 2.6rem; }
+
   .site-header { position: sticky; top: 0; }
   .desktop-nav { display: flex; }
   .mobile-nav-wrap { display: none; }
@@ -1152,6 +1303,46 @@ dialog[open]::backdrop { animation: backdrop-in 0.25s ease both; }
   .visit { grid-template-columns: 11rem minmax(0, 1fr) auto; gap: 2rem; }
   .visit-grid { grid-column: auto; grid-row: auto; }
 }
+
+/* ---------- 다른 화면의 사진 띠와 움직임 (page-fx.js) ---------- */
+/* 화면 맨 위 사진 띠: 홈 첫 화면처럼 상단 메뉴 아래까지 깔리고, 아래쪽은 바탕으로 스며든다 */
+.page.has-banner { padding-top: 0; }
+.page-banner {
+  position: relative;
+  height: clamp(15rem, 42vh, 27rem);
+  margin-top: calc(var(--header-h) * -1);
+  overflow: clip;
+  background: var(--night-900);
+  -webkit-mask-image: linear-gradient(180deg, #000 0, #000 50%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0, #000 50%, transparent 100%);
+  animation: banner-lit 1.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@keyframes banner-lit { from { filter: brightness(0.4) saturate(0.6); } to { filter: none; } }
+.page-banner img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.72) saturate(0.86); }
+.page-banner[data-plain] img { filter: none; }
+.page-banner + .wrap .page-head { position: relative; margin-top: -6.5rem; }
+.page-banner + .wrap .page-head h1 { text-shadow: 0 2px 24px oklch(10% 0.05 262 / 0.75); }
+
+/* 입체 화면 캔버스는 원래 사진 위에 같은 크기로 겹친다 */
+.depth-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.has-3d > img { visibility: hidden; }
+
+/* 내용이 화면에 들어올 때 아래에서 떠오르듯 차례로 나타난다 */
+.fx .reveal {
+  opacity: 0;
+  translate: 0 26px;
+  transition: opacity 0.75s ease, translate 0.95s var(--ease-out);
+  transition-delay: calc(var(--order, 0) * 80ms);
+}
+.fx .reveal.is-in { opacity: 1; translate: none; }
+
+/* 갤러리 사진: 마우스를 올린 쪽으로 살짝 기울고, 사진은 반대로 조금 밀려 깊이가 생긴다 */
+.fx .gallery-card {
+  transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition: transform 0.5s var(--ease-out), opacity 0.75s ease, translate 0.95s var(--ease-out);
+  transition-delay: 0s, calc(var(--order, 0) * 80ms), calc(var(--order, 0) * 80ms);
+}
+.fx .gallery-card img { translate: var(--shift-x, 0) var(--shift-y, 0); scale: 1.08; }
 
 /* ---------- 접근성 설정 대응 ---------- */
 @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
